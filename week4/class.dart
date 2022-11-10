@@ -1,3 +1,6 @@
+import 'class_detial/model/user_model.dart';
+import 'class_detial/model/user_model_2.dart';
+
 void main() {
   // musteri adi var, parasi var, yasi var, bla bla
 
@@ -63,20 +66,19 @@ void main() {
   User user1 = User('vb', 15, age: 21, city: 'aaa', id: '123');
   //User user2 = User('vb', 15, null, null);
 
-  final user3 = User('aa', 159, age: 13, id: '123');
+  final user3 = User('aa', 159, age: 13, id: '12');
 
   print(user3.userCode);
 
   print(user1.name);
 
-  print(user3._id);
 
   // musteri son gelen kisinin citysinine gore kapmanya yapacak eger istanbul ise
 
   if (user3.city == null) {
     print('musteri sehir bilgisini vermemiz');
   } else {
-    if (user3.city.isEmpty) {
+    if (user3.city!.isEmpty) {
       print('okok');
     }
 
@@ -84,6 +86,20 @@ void main() {
       print('tebrikler kazandiniz');
     }
   }
+
+  // musteri idsi 1 2 olana indirim yap
+  if (user3.isSpecialUser('12')) {
+    user3.money += 5;
+    print('para eklendi');
+  }
+
+  //
+
+  User2 newUser2 = User2('vb', 15, age: null, city: '');
+  newUser2.money += 5;
+  newUser2.money = null;
+
+  print(newUser2.toString());
 }
 
 int? controlMoney(int? money){
@@ -103,44 +119,3 @@ void controlCustomerAge(int value){
     print('alisveris yapamaz');
   }
 }
-
-// adi olmak zorunda
-// parasi olmak zorunda
-// yasini vermeyebilir
-// citiysini vermeyebilir
-// city yoksa ist say
-// id degisine sadece bu sinif icinden erisebilsin
-class User{
-  // ozellikleri neler
-  late final String name;
-  late final int money;
-  late final int age;
-  late final String city;
-
-  late final String userCode;
-
-  late final String _id;
-
-  User(String name, int money, {required String id, String? city, int? age}) {
-    this.name = name;
-    this.money = money;
-    this.age = age!;
-    this.city = city!;
-    _id = id;
-    userCode = (city ?? 'ist') + name;
-  }
-}
-
-class User2{
-  // ozellikleri neler
-  final String name;
-  final int money;
-  final int age;
-  final String city;
-
-  late final String userCode;
-
-  User2(this.name, this.money,{required this.age, required this.city}){
-
-  }
-  }
