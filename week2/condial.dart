@@ -1,3 +1,5 @@
+import '../week5/class_singleton.dart';
+
 void main() {
   int money = 15;
   String userName = "veli";
@@ -14,7 +16,7 @@ void main() {
   money = money - 10;
 
   if (money > 10) {
-    print("Sencok zenginsin abii");
+    print("Sen cok zenginsin abii");
   } else {
     print('abi burada ne isin var');
   }
