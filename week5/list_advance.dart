@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'class_singleton.dart';
+
 void main(List<String> args) {
   final model = CarModel(category: CarModels.bmw, name: 'bmw x5', money: 1412, isSecondHand: false);
 
@@ -45,13 +47,30 @@ void main(List<String> args) {
 
   final index = carItems.indexOf(newCar);
   print(index);
-
-  carItems.add(CarModel(category: CarModels.mercedes, name: 'merer', money: 12312));
+  final _mercedes = CarModel(category: CarModels.mercedes, name: 'merer', money: 12312);
+  carItems.add(_mercedes);
   carItems.sort((first, second) => second.money.compareTo(first.money));
 
-
+  final users = carItems.expand((element) => element.users).toList();
+  calculateToUser(carItems);
+  carItems.remove(_mercedes);
+  carItems.removeWhere((element) => element.category == CarModels.bmw || element.money < 30);
+  print(carItems);
 }
 
+void calculateToUser(List<CarModel> items){
+  // itemleri duzelt bmw olanlari yamaha yap
+  final _items = [...items.toList()];
+  final newItems = items.map((CarModel e) {
+    return CarModel(category: e.category == CarModels.bmw ? CarModels.yamaha : e.category, 
+    name: e.name, 
+    money: 
+    e.money,
+    isSecondHand: false);
+  }).toList();
+
+  print(newItems);
+}
  
 
 // benim bir arabalar sinifim olacak
@@ -73,10 +92,17 @@ void main(List<String> args) {
 
 // bana arabalarimi kucukten buyuge dogru sıralar mısın
 
+// ben butun arabalarmi user yapicam
+
+// ya bu son ekleneni silelim
+// bmw olan ve 30dan dusuk olanlari silelim
+
 class CarModel {
-  final CarModels category;
+  CarModels category;
   final String name;
   final double money;
+
+  List<User> users;
   String? city;
   bool isSecondHand; 
   
@@ -86,6 +112,7 @@ class CarModel {
     required this.money,
     this.city,
     this.isSecondHand = true,
+    this.users = const [],
   });
 
   @override
