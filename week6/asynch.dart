@@ -4,9 +4,11 @@ Future<void> main(List<String> args) async {
 
   Stream<int> bankMoneys = Stream.empty();
   bankMoneys = dataAddBankMoney(55, 3);
-  bankMoneys.listen((event) {
-    print(event);
-  });
+  // bankMoneys.listen((event) {
+  //   print(event);
+  // });
+
+  print(await bankMoneys.where((event) => event == 258).toList());
 
   // await Future.forEach([1, 2, 3, 4, 5, 6], (int element) async {
   //   await Future.delayed(Duration(seconds: 2));
@@ -20,7 +22,7 @@ Future<void> main(List<String> args) async {
     print('hello2');
   });
   print('hello3');
-  Future.delayed(Duration(seconds: 1)).whenComplete((){
+  Future.delayed(Duration(seconds: 2)).whenComplete((){
     print('hello4');
   });
 }
